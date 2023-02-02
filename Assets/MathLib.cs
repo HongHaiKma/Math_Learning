@@ -9,9 +9,12 @@ public class MathLib : MonoBehaviour
     public Transform youTrans;
     public Transform enemyTrans;
     public Transform cross;
+    public Transform origin;
 
     public bool front;
     public bool behind;
+
+    public float angle;
 
     // [Sirenix.OdinInspector.Button]
     public void Update()
@@ -48,6 +51,8 @@ public class MathLib : MonoBehaviour
             front = false;
             behind = true;
         }
+
+        angle = Vector3.Angle(enemyTrans.position, youTrans.position);
     }
 
     [Sirenix.OdinInspector.Button]
@@ -63,13 +68,14 @@ public class MathLib : MonoBehaviour
     public void GetDot()
     {
         // Debug.Log("Cross: " + Vector3.Cross(youTrans.position, enemyTrans.position));
-        Debug.Log("Cross: " + Vector3.Dot(enemyTrans.position.normalized, youTrans.position.normalized));
-        float dot = Vector3.Dot(enemyTrans.position, youTrans.position);
+        // Debug.Log("Dot: " + Vector3.Dot(enemyTrans.position.normalized, youTrans.position.normalized));
+        float dot = Vector3.Dot(enemyTrans.position.normalized, youTrans.position.normalized);
 
         Debug.Log("Dot: " + dot);
+        Debug.Log("Dot2: " + 1 / (Mathf.Sqrt(26)));
         Debug.Log("Angle: " + Mathf.Acos(dot) * Mathf.Rad2Deg);
+        Debug.Log("Angle2: " + Mathf.Acos(1 / (Mathf.Sqrt(26))) * Mathf.Rad2Deg);
         Debug.Log("Acos: " + Mathf.Acos(dot));
-        Debug.Log("Cos: " + Mathf.Acos(90) * Mathf.Rad2Deg);
         Debug.Log("ANGLE: " + Vector3.Angle(enemyTrans.position, youTrans.position));
 
         Debug.Log("Normalize enemy: " + enemyTrans.position.normalized);
@@ -122,4 +128,13 @@ public class MathLib : MonoBehaviour
 
         return dotProduct;
     }
+
+    // void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawLine(origin.position, enemyTrans.position);
+
+    //     Gizmos.color = Color.green;
+    //     Gizmos.DrawLine(origin.position, youTrans.position);
+    // }
 }
