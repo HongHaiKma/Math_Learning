@@ -51,17 +51,32 @@ public class PlaneRayIntersection : MonoBehaviour
 
     public int rayLength = 10;
 
+    public Transform posDown;
+
     private void Update()
     {
         RaycastHit hit;
+        RaycastHit hitDown;
 
         Ray ray = new Ray(transform.position, transform.forward);
         Debug.DrawRay(transform.position, transform.forward * rayLength, Color.red);
 
+        Ray rayDown = new Ray(transform.position, posDown.position - transform.position);
+        Debug.DrawRay(transform.position, (posDown.position - transform.position) * rayLength, Color.yellow);
+
+        Vector3 posDownHit = Vector3.zero;
+
+        if (Physics.Raycast(rayDown, out hitDown, rayLength))
+        {
+            posDownHit = hitDown.point;
+        }
+
         if (Physics.Raycast(ray, out hit, rayLength))
         {
             Vector3 dir = Vector3.ProjectOnPlane(transform.forward, hit.normal);
-            Debug.DrawRay(hit.point, dir * rayLength, Color.red);
+            Debug.DrawRay(hit.point, dir * rayLength, Color.green);
+            // Vector3 dir2 = hit.point - posDownHit;
+            // Debug.DrawRay(posDownHit, dir2, Color.cyan);
         }
     }
 }
