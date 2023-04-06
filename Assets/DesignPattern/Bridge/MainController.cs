@@ -14,13 +14,10 @@ namespace BridgeDesignPattern
             sonyRemoteControl.SetChannel(101);
             sonyRemoteControl.SwitchOff();
 
-            Console.WriteLine();
             SamsungRemoteControl samsungRemoteControl = new SamsungRemoteControl(new SamsungLedTv());
             samsungRemoteControl.SwitchOn();
             samsungRemoteControl.SetChannel(202);
             samsungRemoteControl.SwitchOff();
-
-            Console.ReadKey();
         }
     }
 }
